@@ -63,6 +63,7 @@ ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir /var/run/sshd
 RUN sed -i 's/without-password/yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+RUN echo 'SSHD: ALL' >> /etc/hosts.allow
 
 # Root password
 RUN echo 'root:hadoop' |chpasswd
