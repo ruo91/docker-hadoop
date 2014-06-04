@@ -14,8 +14,8 @@ RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-
  && tar xzf jdk-8u5-linux-x64.tar.gz && mv jdk1.8.0_05 /usr/local/jdk && rm -f jdk-8u5-linux-x64.tar.gz \
  && echo '' >> /etc/profile \
  && echo '# JDK' >> /etc/profile \
- && echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile \
- && echo 'PATH $PATH:JAVA_HOME/bin' >> /etc/profile \
+ && echo "export JAVA_HOME=$JAVA_HOME" >> /etc/profile \
+ && echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile \
  && echo '' >> /etc/profile
 
 # Apache Hadoop
