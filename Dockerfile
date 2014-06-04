@@ -26,13 +26,13 @@ ENV HADOOP_MAPRED_HOME $HADOOP_PREFIX
 ENV HADOOP_COMMON_HOME $HADOOP_PREFIX
 ENV HADOOP_HDFS_HOME $HADOOP_PREFIX
 ENV YARN_HOME $HADOOP_PREFIX
-RUN echo "# Hadoop" >> /etc/profile
+RUN echo '# Hadoop' >> /etc/profile
 RUN echo "export HADOOP_PREFIX=$SRC_DIR/$HADOOP_VERSION" >> /etc/profile
-RUN echo "export PATH=$PATH:$HADOOP_PREFIX/bin:$HADOOP_PREFIX/sbin" >> /etc/profile
-RUN echo "export HADOOP_MAPRED_HOME=$HADOOP_PREFIX" >> /etc/profile
-RUN echo "export HADOOP_COMMON_HOME=$HADOOP_PREFIX" >> /etc/profile
-RUN echo "export HADOOP_HDFS_HOME=$HADOOP_PREFIX" >> /etc/profile
-RUN echo "export YARN_HOME=$HADOOP_PREFIX" >> /etc/profile
+RUN echo 'export PATH=$PATH:$HADOOP_PREFIX/bin:$HADOOP_PREFIX/sbin' >> /etc/profile
+RUN echo 'export HADOOP_MAPRED_HOME=$HADOOP_PREFIX' >> /etc/profile
+RUN echo 'export HADOOP_COMMON_HOME=$HADOOP_PREFIX' >> /etc/profile
+RUN echo 'export HADOOP_HDFS_HOME=$HADOOP_PREFIX' >> /etc/profile
+RUN echo 'export YARN_HOME=$HADOOP_PREFIX' >> /etc/profile
 
 # Add in the etc/hadoop directory
 ADD conf/core-site.xml $HADOOP_PREFIX/etc/hadoop/core-site.xml
@@ -43,10 +43,10 @@ RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/local/jdk:' $HADOOP_P
 
 # Native
 # https://gist.github.com/ruo91/7154697#comment-936487
-RUN echo "export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_PREFIX}/lib/native" >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-RUN echo "export HADOOP_OPTS="-Djava.library.path=$HADOOP_PREFIX/lib"" >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-RUN echo "export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_PREFIX}/lib/native" >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
-RUN echo "export HADOOP_OPTS="-Djava.library.path=$HADOOP_PREFIX/lib"" >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
+RUN echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+RUN echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+RUN echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
+RUN echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
 
 # SSH keygen
 RUN cd /root && ssh-keygen -t dsa -P '' -f "/root/.ssh/id_dsa" \
@@ -69,7 +69,7 @@ RUN echo 'SSHD: ALL' >> /etc/hosts.allow
 RUN echo 'root:hadoop' |chpasswd
 
 # Port
-EXPOSE 22 8030 8031 8032 8033 8040 8042 8088 50010 50020 50070 50075 50090 9000
+EXPOSE 22 8030 8031 8032 8033 8040 8042 8088 9000 50010 50020 50070 50075 50090
 
 # Daemon
 CMD ["/usr/bin/supervisord"]
