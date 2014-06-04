@@ -11,7 +11,12 @@ RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tool
 ENV JAVA_HOME /usr/local/jdk
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
- && tar xzf jdk-8u5-linux-x64.tar.gz && mv jdk1.8.0_05 /usr/local/jdk && rm -f jdk-8u5-linux-x64.tar.gz
+ && tar xzf jdk-8u5-linux-x64.tar.gz && mv jdk1.8.0_05 /usr/local/jdk && rm -f jdk-8u5-linux-x64.tar.gz \
+ && echo '' >> /etc/profile \
+ && echo '# JDK' >> /etc/profile \
+ && echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile \
+ && echo 'PATH $PATH:JAVA_HOME/bin' >> /etc/profile \
+ && echo '' >> /etc/profile
 
 # Apache Hadoop
 ENV SRC_DIR /opt
