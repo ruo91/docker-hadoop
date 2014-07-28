@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tool
 # JDK
 ENV JAVA_HOME /usr/local/jdk
 ENV PATH $PATH:$JAVA_HOME/bin
-RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
- && tar xzf jdk-8u5-linux-x64.tar.gz && mv jdk1.8.0_05 /usr/local/jdk && rm -f jdk-8u5-linux-x64.tar.gz \
+RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u11-b12/jdk-8u11-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
+ && tar xzf jdk-8u11-linux-x64.tar.gz && mv jdk1.8.0_11 /usr/local/jdk && rm -f jdk-8u11-linux-x64.tar.gz \
  && echo '' >> /etc/profile \
  && echo '# JDK' >> /etc/profile \
  && echo "export JAVA_HOME=$JAVA_HOME" >> /etc/profile \
@@ -20,7 +20,7 @@ RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-
 
 # Apache Hadoop
 ENV SRC_DIR /opt
-ENV HADOOP_VERSION hadoop-2.4.0
+ENV HADOOP_VERSION hadoop-2.4.1
 RUN cd $SRC_DIR && curl -LO "http://www.us.apache.org/dist/hadoop/common/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
  && tar xzf $HADOOP_VERSION.tar.gz ; rm -f $HADOOP_VERSION.tar.gz
 
