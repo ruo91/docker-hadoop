@@ -1,16 +1,14 @@
-# Apache hadoop 2.4.0 - Pseudo-Distributed Mode
+# Apache hadoop 2.4.x - Pseudo-Distributed Mode
 
 **- Container run**
 
-    root@ruo91:~# docker run -d -P --name "Hadoop" ruo91/hadoop
+    root@ruo91:~# docker run -d -P --name="Hadoop" -h "hadoop" ruo91/hadoop:2.4.1
 
 **- SSH login**
 
 root password : hadoop
 
-    root@ruo91:~# docker port Hadoop 22
-    0.0.0.0:49170
-    root@ruo91:~# ssh root@localhost -p 49170
+    root@ruo91:~# ssh `docker inspect -f '{{ .NetworkSettings.IPAddress }}' Hadoop`
 
 **- Hadoop run**
 
@@ -30,7 +28,6 @@ root password : hadoop
     root@hadoop:~# hdfs dfs -ls /
     Found 1 items
     -rw-r--r--   3 root supergroup         20 2014-05-03 04:50 /test.log
-
     root@hadoop:~# exit
     root@ruo91:~# docker port Hadoop 50070
     0.0.0.0:49181
@@ -43,7 +40,7 @@ Overview
 Data Node
 ![enter image description here][2]
 
-Utilities - Browse th file system
+Utilities - Browse the file system
 ![enter image description here][3]
 
 Thanks. :-)
