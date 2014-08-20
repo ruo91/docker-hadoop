@@ -1,14 +1,14 @@
-# Apache hadoop 2.4.x - Pseudo-Distributed Mode
+# Apache hadoop 2.x - Pseudo-Distributed Mode
 
 **- Container run**
 
-    root@ruo91:~# docker run -d -P --name="Hadoop" -h "hadoop" ruo91/hadoop:2.4.1
+    root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" -p 50070:50070 -p 50075:50075 ruo91/hadoop:2.5.0
 
 **- SSH login**
 
 root password : hadoop
 
-    root@ruo91:~# ssh `docker inspect -f '{{ .NetworkSettings.IPAddress }}' Hadoop`
+    root@ruo91:~# ssh `docker inspect -f '{{ .NetworkSettings.IPAddress }}' hadoop`
 
 **- Hadoop run**
 
