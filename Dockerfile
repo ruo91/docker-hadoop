@@ -20,7 +20,7 @@ RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u11-b12/jdk-8u11-linu
 
 # Apache Hadoop
 ENV SRC_DIR /opt
-ENV HADOOP_VERSION hadoop-2.4.1
+ENV HADOOP_VERSION hadoop-2.5.0
 RUN cd $SRC_DIR && curl -LO "http://www.us.apache.org/dist/hadoop/common/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
  && tar xzf $HADOOP_VERSION.tar.gz ; rm -f $HADOOP_VERSION.tar.gz
 
