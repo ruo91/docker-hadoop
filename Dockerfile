@@ -8,14 +8,17 @@ MAINTAINER Yongbok Kim <ruo91@yongbok.net>
 RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tools iputils-ping nano
 
 # JDK
+ENV JDK_URL http://download.oracle.com/otn-pub/java/jdk
+ENV JDK_VER 8u20-b26
+ENV JDK_VER2 jdk-8u20
 ENV JAVA_HOME /usr/local/jdk
 ENV PATH $PATH:$JAVA_HOME/bin
-RUN curl -LO "http://download.oracle.com/otn-pub/java/jdk/8u11-b12/jdk-8u11-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
- && tar xzf jdk-8u11-linux-x64.tar.gz && mv jdk1.8.0_11 /usr/local/jdk && rm -f jdk-8u11-linux-x64.tar.gz \
+RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
+ && tar xzf $JDK_VER2-linux-x64.tar.gz && mv jdk1* $JAVA_HOME && rm -f $JDK_VER2-linux-x64.tar.gz \
  && echo '' >> /etc/profile \
  && echo '# JDK' >> /etc/profile \
  && echo "export JAVA_HOME=$JAVA_HOME" >> /etc/profile \
- && echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile \
+ && echo 'export PATH="$PATH:$JAVA_HOME/bin"' >> /etc/profile \
  && echo '' >> /etc/profile
 
 # Apache Hadoop
@@ -74,7 +77,8 @@ RUN echo 'SSHD: ALL' >> /etc/hosts.allow
 RUN echo 'root:hadoop' |chpasswd
 
 # Port
-EXPOSE 22 8030 8031 8032 8033 8040 8042 8088 9000 50010 50020 50070 50075 50090
+# Node Manager: 8042, Resource Manager: 8088, NameNode: 50070, DataNode: 50075, SecondaryNode: 50090
+EXPOSE 22 8042 8088 50070 50075 50090
 
 # Daemon
 CMD ["/usr/bin/supervisord"]
