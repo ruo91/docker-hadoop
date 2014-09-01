@@ -1,5 +1,5 @@
 #
-# Dockerfile - Apache hadoop
+# Dockerfile - Apache Hadoop
 #
 FROM     ubuntu:14.04
 MAINTAINER Yongbok Kim <ruo91@yongbok.net>
@@ -23,8 +23,9 @@ RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'C
 
 # Apache Hadoop
 ENV SRC_DIR /opt
+ENV HADOOP_URL http://apache.mirror.cdnetworks.com/hadoop/common
 ENV HADOOP_VERSION hadoop-2.5.0
-RUN cd $SRC_DIR && curl -LO "http://www.us.apache.org/dist/hadoop/common/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
+RUN cd $SRC_DIR && curl -LO "$HADOOP_URL/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
  && tar xzf $HADOOP_VERSION.tar.gz ; rm -f $HADOOP_VERSION.tar.gz
 
 # Hadoop ENV
@@ -34,13 +35,13 @@ ENV HADOOP_MAPRED_HOME $HADOOP_PREFIX
 ENV HADOOP_COMMON_HOME $HADOOP_PREFIX
 ENV HADOOP_HDFS_HOME $HADOOP_PREFIX
 ENV YARN_HOME $HADOOP_PREFIX
-RUN echo '# Hadoop' >> /etc/profile
-RUN echo "export HADOOP_PREFIX=$SRC_DIR/$HADOOP_VERSION" >> /etc/profile
-RUN echo 'export PATH=$PATH:$HADOOP_PREFIX/bin:$HADOOP_PREFIX/sbin' >> /etc/profile
-RUN echo 'export HADOOP_MAPRED_HOME=$HADOOP_PREFIX' >> /etc/profile
-RUN echo 'export HADOOP_COMMON_HOME=$HADOOP_PREFIX' >> /etc/profile
-RUN echo 'export HADOOP_HDFS_HOME=$HADOOP_PREFIX' >> /etc/profile
-RUN echo 'export YARN_HOME=$HADOOP_PREFIX' >> /etc/profile
+RUN echo '# Hadoop' >> /etc/profile \
+ && echo "export HADOOP_PREFIX=$SRC_DIR/$HADOOP_VERSION" >> /etc/profile \
+ && echo 'export PATH=$PATH:$HADOOP_PREFIX/bin:$HADOOP_PREFIX/sbin' >> /etc/profile \
+ && echo 'export HADOOP_MAPRED_HOME=$HADOOP_PREFIX' >> /etc/profile \
+ && echo 'export HADOOP_COMMON_HOME=$HADOOP_PREFIX' >> /etc/profile \
+ && echo 'export HADOOP_HDFS_HOME=$HADOOP_PREFIX' >> /etc/profile \
+ && echo 'export YARN_HOME=$HADOOP_PREFIX' >> /etc/profile
 
 # Add in the etc/hadoop directory
 ADD conf/core-site.xml $HADOOP_PREFIX/etc/hadoop/core-site.xml
@@ -51,10 +52,10 @@ RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/local/jdk:' $HADOOP_P
 
 # Native
 # https://gist.github.com/ruo91/7154697#comment-936487
-RUN echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-RUN echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-RUN echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
-RUN echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
+RUN echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh \
+ && echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh \
+ && echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh \
+ && echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
 
 # SSH keygen
 RUN cd /root && ssh-keygen -t dsa -P '' -f "/root/.ssh/id_dsa" \
