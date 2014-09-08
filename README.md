@@ -1,16 +1,21 @@
-# Apache hadoop 2.4.x - Pseudo-Distributed Mode
+# Apache Hadoop 2.x - Pseudo-Distributed Mode
+**- Container run**
+
+    root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
+    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 ruo91/hadoop:2.5.x
+or
 
 **- Build**
 
     root@ruo91:~# git clone https://github.com/ruo91/docker-hadoop.git /opt/docker-hadoop
     root@ruo91:~# cd /opt/docker-hadoop
-    root@ruo91:~# git checkout -b 2.4.x origin/2.4.x
-    root@ruo91:~# docker build --rm -t hadoop:2.4.x /opt/docker-hadoop
+    root@ruo91:~# git checkout -b 2.5.x origin/2.5.x
+    root@ruo91:~# docker build --rm -t hadoop:2.5.x /opt/docker-hadoop
 
 **- Container run**
 
     root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
-    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.4.x
+    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.5.x
 
 **- SSH login**
 
@@ -118,7 +123,7 @@ or
     Job Finished in 21.529 seconds
     Estimated value of Pi is 3.55555555555555555556
 
-**- Web**
+**- Web UI**
 
 Namenode Information
 ![Namenode Information][1]
@@ -126,12 +131,29 @@ Namenode Information
 Datanode Information
 ![Datanode Information][2]
 
+Secondarynode Information
+![Secondarynode Information][3]
+
+Startup progress Information
+![Startup progress Information][4]
+
 Utilities - Browse the file system
-![Browsing HDFS][3]
+![Browsing HDFS][5]
+
+Nodemanager Information
+![Nodemanager Information][6]
+
+Resource manager Information
+![Resource Manager Information][7]
+
 
 Thanks. :-)
 
 
-  [1]: http://cdn.yongbok.net/ruo91/img/hadoop/2.4.x/apache_hadoop_2.4.x_namenode.png
-  [2]: http://cdn.yongbok.net/ruo91/img/hadoop/2.4.x/apache_hadoop_2.4.x_datanode.png
-  [3]: http://cdn.yongbok.net/ruo91/img/hadoop/2.4.x/apache_hadoop_2.4.x_explorer.png
+  [1]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_namenode.png
+  [2]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_datanode.png
+  [3]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_secondarynode.png
+  [4]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_startup_progress.png
+  [5]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_browsing_hdfs.png
+  [6]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_nodemanager.png
+  [7]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_resourcemanager.png
