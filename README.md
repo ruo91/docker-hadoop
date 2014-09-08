@@ -1,5 +1,12 @@
 # Apache hadoop 2.4.x - Pseudo-Distributed Mode
 
+**- Container run**
+
+    root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
+    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 ruo91/hadoop:2.4.x
+
+or
+
 **- Build**
 
     root@ruo91:~# git clone https://github.com/ruo91/docker-hadoop.git /opt/docker-hadoop
@@ -118,7 +125,7 @@ or
     Job Finished in 21.529 seconds
     Estimated value of Pi is 3.55555555555555555556
 
-**- Web**
+**- Web UI**
 
 Namenode Information
 ![Namenode Information][1]
