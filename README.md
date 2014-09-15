@@ -46,7 +46,7 @@ root password : hadoop
 or
 
     root@hadoop:~# hadoop jar \
-    $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.5.0.jar pi 3 3
+    $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples*.jar pi 3 3
     Number of Maps  = 3
     Samples per Map = 3
     Wrote input for Map #0
