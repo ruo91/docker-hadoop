@@ -36,7 +36,7 @@ ENV HADOOP_COMMON_HOME $HADOOP_PREFIX
 ENV HADOOP_HDFS_HOME $HADOOP_PREFIX
 ENV YARN_HOME $HADOOP_PREFIX
 RUN echo '# Hadoop' >> /etc/profile \
- && echo "export HADOOP_PREFIX=$SRC_DIR/$HADOOP_VERSION" >> /etc/profile \
+ && echo "export HADOOP_PREFIX=$HADOOP_PREFIX" >> /etc/profile \
  && echo 'export PATH=$PATH:$HADOOP_PREFIX/bin:$HADOOP_PREFIX/sbin' >> /etc/profile \
  && echo 'export HADOOP_MAPRED_HOME=$HADOOP_PREFIX' >> /etc/profile \
  && echo 'export HADOOP_COMMON_HOME=$HADOOP_PREFIX' >> /etc/profile \
