@@ -2,20 +2,20 @@
 **- Container run**
 
     root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
-    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 ruo91/hadoop:2.5.x
+    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 ruo91/hadoop:2.6.x
 or
 
 **- Build**
 
     root@ruo91:~# git clone https://github.com/ruo91/docker-hadoop.git /opt/docker-hadoop
     root@ruo91:~# cd /opt/docker-hadoop
-    root@ruo91:~# git checkout -b 2.5.x origin/2.5.x
-    root@ruo91:~# docker build --rm -t hadoop:2.5.x /opt/docker-hadoop
+    root@ruo91:~# git checkout -b 2.6.x origin/2.6.x
+    root@ruo91:~# docker build --rm -t hadoop:2.6.x /opt/docker-hadoop
 
 **- Container run**
 
     root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
-    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.5.x
+    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.6.x
 
 **- SSH login**
 
