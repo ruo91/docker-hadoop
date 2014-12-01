@@ -23,7 +23,7 @@ RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'C
 
 # Apache Hadoop
 ENV SRC_DIR /opt
-ENV HADOOP_URL http://apache.mirror.cdnetworks.com/hadoop/common
+ENV HADOOP_URL https://archive.apache.org/dist/hadoop/core
 ENV HADOOP_VERSION hadoop-2.4.1
 RUN cd $SRC_DIR && curl -LO "$HADOOP_URL/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
  && tar xzf $HADOOP_VERSION.tar.gz ; rm -f $HADOOP_VERSION.tar.gz
