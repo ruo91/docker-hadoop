@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tool
 
 # JDK
 ENV JDK_URL http://download.oracle.com/otn-pub/java/jdk
-ENV JDK_VER 8u25-b17
-ENV JDK_VER2 jdk-8u25
+ENV JDK_VER 8u45-b14
+ENV JDK_VER2 jdk-8u45
 ENV JAVA_HOME /usr/local/jdk
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
@@ -24,7 +24,7 @@ RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'C
 # Apache Hadoop
 ENV SRC_DIR /opt
 ENV HADOOP_URL http://www.eu.apache.org/dist/hadoop/common
-ENV HADOOP_VERSION hadoop-2.6.0
+ENV HADOOP_VERSION hadoop-2.7.0
 RUN cd $SRC_DIR && curl -LO "$HADOOP_URL/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
  && tar xzf $HADOOP_VERSION.tar.gz ; rm -f $HADOOP_VERSION.tar.gz
 
@@ -49,13 +49,6 @@ ADD conf/hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
 ADD conf/yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 ADD conf/mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/local/jdk:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-
-# Native
-# https://gist.github.com/ruo91/7154697#comment-936487
-RUN echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh \
- && echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh \
- && echo 'export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_PREFIX/lib/native' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh \
- && echo 'export HADOOP_OPTS=-Djava.library.path=$HADOOP_PREFIX/lib' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
 
 # SSH keygen
 RUN cd /root && ssh-keygen -t dsa -P '' -f "/root/.ssh/id_dsa" \
