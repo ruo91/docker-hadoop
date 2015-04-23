@@ -15,7 +15,7 @@ or
 **- Container run**
 
     root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
-    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.6.x
+    -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.7.x
 
 **- SSH login**
 
