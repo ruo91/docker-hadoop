@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tool
 
 # JDK
 ENV JDK_URL http://download.oracle.com/otn-pub/java/jdk
-ENV JDK_VER 8u45-b14
-ENV JDK_VER2 jdk-8u45
+ENV JDK_VER 8u51-b16
+ENV JDK_VER2 jdk-8u51
 ENV JAVA_HOME /usr/local/jdk
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
@@ -24,7 +24,7 @@ RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'C
 # Apache Hadoop
 ENV SRC_DIR /opt
 ENV HADOOP_URL http://www.eu.apache.org/dist/hadoop/common
-ENV HADOOP_VERSION hadoop-2.7.0
+ENV HADOOP_VERSION hadoop-2.7.1
 RUN cd $SRC_DIR && curl -LO "$HADOOP_URL/$HADOOP_VERSION/$HADOOP_VERSION.tar.gz" \
  && tar xzf $HADOOP_VERSION.tar.gz ; rm -f $HADOOP_VERSION.tar.gz
 
