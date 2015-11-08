@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tool
 
 # JDK
 ENV JDK_URL http://download.oracle.com/otn-pub/java/jdk
-ENV JDK_VER 8u51-b16
-ENV JDK_VER2 jdk-8u51
+ENV JDK_VER 8u65-b17
+ENV JDK_VER2 jdk-8u65
 ENV JAVA_HOME /usr/local/jdk
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN cd $SRC_DIR && curl -LO "$JDK_URL/$JDK_VER/$JDK_VER2-linux-x64.tar.gz" -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
