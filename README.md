@@ -1,29 +1,27 @@
-# Apache Hadoop 2.x - Pseudo-Distributed Mode
-**- Container run**
 
+# Apache Hadoop 2.x - Pseudo-Distributed Mode
+## - Container run
     root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
     -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 ruo91/hadoop:2.7.x
 or
 
-**- Build**
-
+## - Build
     root@ruo91:~# git clone https://github.com/ruo91/docker-hadoop.git /opt/docker-hadoop
     root@ruo91:~# cd /opt/docker-hadoop
     root@ruo91:~# git checkout -b 2.7.x origin/2.7.x
     root@ruo91:~# docker build --rm -t hadoop:2.7.x /opt/docker-hadoop
 
-**- Container run**
+## - Container run
 
     root@ruo91:~# docker run -d --name="hadoop" -h "hadoop" \
     -p 8042:8042 -p 8088:8088 -p 50070:50070 -p 50075:50075 -p 50090:50090 hadoop:2.7.x
 
-**- SSH login**
-
+## - SSH login
 root password : hadoop
 
     root@ruo91:~# ssh `docker inspect -f '{{ .NetworkSettings.IPAddress }}' hadoop`
 
-**- Hadoop run**
+## - Hadoop run
 
     root@hadoop:~# start-all.sh
     root@hadoop:~# jps
@@ -34,7 +32,7 @@ root password : hadoop
     540 ResourceManager
     334 SecondaryNameNode
 
-**- Testing**
+## - Testing
 
     root@hadoop:~# for((i=0; i<10; i++)) do echo ${i}; done > test.log
     root@hadoop:~# hdfs dfs -copyFromLocal test.log /
@@ -123,37 +121,26 @@ or
     Job Finished in 21.529 seconds
     Estimated value of Pi is 3.55555555555555555556
 
-**- Web UI**
-
+## - Web UI
 Namenode Information
-![Namenode Information][1]
+![Namenode Information](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_namenode.png)
 
 Datanode Information
-![Datanode Information][2]
+![Datanode Information](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_datanode.png)
 
 Secondarynode Information
-![Secondarynode Information][3]
+![Secondarynode Information](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_secondarynode.png)
 
 Startup progress Information
-![Startup progress Information][4]
+![Startup progress Information](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_startup_progress.png)
 
 Utilities - Browse the file system
-![Browsing HDFS][5]
+![Browsing HDFS](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_browsing_hdfs.png)
 
 Nodemanager Information
-![Nodemanager Information][6]
+![Nodemanager Information](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_nodemanager.png)
 
 Resource manager Information
-![Resource Manager Information][7]
-
+![Resource Manager Information](http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_resourcemanager.png)
 
 Thanks. :-)
-
-
-  [1]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_namenode.png
-  [2]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_datanode.png
-  [3]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_secondarynode.png
-  [4]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_startup_progress.png
-  [5]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_browsing_hdfs.png
-  [6]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_nodemanager.png
-  [7]: http://cdn.yongbok.net/ruo91/img/hadoop/2.x/apache_hadoop_resourcemanager.png
